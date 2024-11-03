@@ -1,0 +1,45 @@
+import java.util.Random;
+
+public class Main {
+    public static void main(String[] args) {
+        Random random = new Random();
+        int count = 1000;
+        int count_change_choice = 0;
+        int count_good_change = 0;
+        int count_no_change = 0;
+        int count_good_no_change = 0;
+        for (int i = 0; i < count; i++) {
+            int good_choice = random.nextInt(3);
+            int num_door = random.nextInt(3);
+            boolean change_choice = random.nextBoolean();
+            if (change_choice) {
+                count_change_choice++;
+                if (good_choice != num_door) {
+                    count_good_change++;
+                }
+            } else {
+                count_no_change++;
+                if (good_choice == num_door) {
+                    count_good_no_change++;
+                }
+            }
+        }
+            float x1 = ((float) count_good_change)
+                    / ((float) count_change_choice) * 100;
+            float x2 = ((float) count_good_no_change
+                    / ((float) count_no_change)) * 100;
+            System.out.println("Общее количество: " + count);
+
+            System.out.println("Количество несмен выбора: "
+                    + count_no_change);
+            System.out.println("Количество удачных несмен выбора: "
+                    + count_good_no_change);
+            System.out.println("Вероятность удачной несмены выбора: " + x2 + "%");
+
+            System.out.println("Количество смен выбора: " + count_change_choice);
+            System.out.println("Количество удачных смен выбора: "
+                    + count_good_change);
+            System.out.println("Вероятность удачной смены: " + x1 + "%");
+        }
+    }
+
