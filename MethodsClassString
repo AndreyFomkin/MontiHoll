@@ -1,0 +1,11 @@
+import java.lang.reflect.Method;
+
+public class Junior {
+    public static void main(String[] args) throws ClassNotFoundException {
+        Class<?> stringClass = String.class;
+        Method[] methods = stringClass.getMethods();
+        for(Method method : methods){
+        System.out.println("Метод класса " + method.getName());
+       }
+    }
+}
