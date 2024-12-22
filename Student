@@ -1,0 +1,50 @@
+import java.io.*;
+
+public class Student<student> implements Serializable {
+    public String name;
+    public int age;
+    public transient double GPA;
+
+    public Student(String name, int age, double GPA) throws IOException {
+        this.name = name;
+        this.age = age;
+        this.GPA = GPA;
+    }
+
+    @Override
+    public String toString() {
+        return "Student{" +
+                "name='" + name + '\'' +
+                ", age=" + age +
+                ", GPA=" + GPA +
+                '}';
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public double getGPA() {
+        return GPA;
+    }
+
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
+        Student student = new Student("Андрей ", 23, 112);
+        FileOutputStream fileOutputStream = new FileOutputStream("studentdata.bin");
+        ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+        objectOutputStream.writeObject(student);
+        System.out.println("Объект сериализован. ");
+
+        FileInputStream fileInputStream = new FileInputStream("studentdata.bin");
+        ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+        student = (Student) objectInputStream.readObject();
+        System.out.println("Объект десериализован.");
+        System.out.println("Имя: " + student.getName());
+        System.out.println("Возраст: " + student.getAge());
+        System.out.println("Балл должен быть скрыт: " + student.getGPA() );
+    }
+}
